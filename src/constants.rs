@@ -1,0 +1,12 @@
+pub const BLOCK_SIZE: f32 = 1.0;
+pub const GRID_WIDTH: u32 = 10;
+pub const GRID_HEIGHT: u32 = 20;
+pub const GRID_DEPTH: u32 = 10;
+pub const FALL_TIME: f32 = 1.0;
+pub const ROTATION_DEGREES: f32 = 90.0;
+pub const CAMERA_HEIGHT: f32 = 20.0;
+pub const CAMERA_RADIUS: f32 = 25.0;
+pub const ROTATION_SPEED: f32 = 1.0;
+pub const MOVE_SPEED: f32 = 5.0;
+pub const EMPTY_CELL: i32 = 0;
+pub const FILLED_CELL: i32 = 1;
