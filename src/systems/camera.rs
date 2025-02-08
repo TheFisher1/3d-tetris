@@ -1,29 +1,30 @@
 use bevy::prelude::*;
-use crate::components::GameCamera;
-use crate::constants::*;
+use crate::game_state::{GameCamera, CAMERA_RADIUS, ROTATION_SPEED};
 
 pub fn rotate_camera(
     time: Res<Time>,
-    keyboard: Res<Input<KeyCode>>,
+    keyboard: Res<ButtonInput<KeyCode>>,
     mut query: Query<(&mut Transform, &mut GameCamera)>,
 ) {
     let (mut transform, mut camera) = query.single_mut();
-    let dt = time.delta_seconds();
-    
+    let dt = time.delta().as_secs_f32();
+
     // Horizontal rotation
-    if keyboard.pressed(KeyCode::Left) {
+    if keyboard.pressed(KeyCode::ArrowLeft) {
         camera.angle += ROTATION_SPEED * dt;
     }
-    if keyboard.pressed(KeyCode::Right) {
+
+    if keyboard.pressed(KeyCode::ArrowRight) {
         camera.angle -= ROTATION_SPEED * dt;
     }
 
     // Vertical movement
-    if keyboard.pressed(KeyCode::Up) {
+    if keyboard.pressed(KeyCode::ArrowUp) {
         camera.height += ROTATION_SPEED * 10.0 * dt;
         camera.height = camera.height.min(50.0);  // Maximum height
     }
-    if keyboard.pressed(KeyCode::Down) {
+
+    if keyboard.pressed(KeyCode::ArrowDown) {
         camera.height -= ROTATION_SPEED * 10.0 * dt;
         camera.height = camera.height.max(5.0);   // Minimum height
     }

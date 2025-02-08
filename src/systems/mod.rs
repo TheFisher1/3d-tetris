@@ -1,9 +1,11 @@
-mod setup;
-mod grid;
-mod movement;
-mod camera;
+pub mod setup;
+pub mod grid;
+pub mod movement;
+pub mod camera;
+mod rotate;
+mod cleanup;
 
-pub use setup::*;
+pub use camera::*;
 pub use grid::*;
 pub use movement::*;
-pub use camera::*;
+pub use rotate::*;

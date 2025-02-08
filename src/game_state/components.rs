@@ -1,7 +1,9 @@
 use bevy::prelude::*;
 
 #[derive(Component)]
-pub struct Tetromino;
+pub struct Tetromino {
+    pub id: isize
+}
 
 #[derive(Component)]
 pub struct GridWall;
@@ -23,4 +25,13 @@ pub struct MovementCooldown {
 pub struct GameCamera {
     pub angle: f32,
     pub height: f32,
-} 
+}
+
+#[derive(Component)]
+pub enum RotateButton {
+    Left,
+    Right,
+    Down,
+    Up,
+
+}
