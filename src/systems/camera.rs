@@ -9,7 +9,6 @@ pub fn rotate_camera(
     let (mut transform, mut camera) = query.single_mut();
     let dt = time.delta().as_secs_f32();
 
-    // Horizontal rotation
     if keyboard.pressed(KeyCode::ArrowLeft) {
         camera.angle += ROTATION_SPEED * dt;
     }
@@ -18,7 +17,6 @@ pub fn rotate_camera(
         camera.angle -= ROTATION_SPEED * dt;
     }
 
-    // Vertical movement
     if keyboard.pressed(KeyCode::ArrowUp) {
         camera.height += ROTATION_SPEED * 10.0 * dt;
         camera.height = camera.height.min(50.0);  // Maximum height

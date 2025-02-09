@@ -1,11 +1,13 @@
 use bevy::prelude::*;
-use crate::game_state::{Falling, GameGrid, MovementCooldown, Stopped, Tetromino, BLOCK_SIZE, GRID_DEPTH, GRID_HEIGHT, GRID_WIDTH, ROTATION_DEGREES};
+use crate::game_state::{Active, Falling, GameGrid, MovementCooldown, Stopped, Tetromino, BLOCK_SIZE, GRID_DEPTH, GRID_HEIGHT, GRID_WIDTH, ROTATION_DEGREES};
+use crate::systems::{RowCleaned};
+use crate::game_state::constants::FALL_TIME;
 
 pub fn keyboard_system(
     time: Res<Time>,
     game_grid: Res<GameGrid>,
     keyboard: Res<ButtonInput<KeyCode>>,
-    mut query: Query<(&mut Transform, &mut MovementCooldown), (With<Tetromino>, With<Falling>)>
+    mut query: Query<(&mut Transform, &mut MovementCooldown), (With<Tetromino>, With<Falling>, With<Active>)>
 ) {
     let (mut transform, mut cooldown) = query.single_mut();
 
@@ -53,21 +55,6 @@ pub fn keyboard_system(
             moved = true;
         }
 
-        // if keyboard.just_pressed(KeyCode::KeyQ) {
-        //     new_transform.rotate_y(ROTATION_DEGREES.to_radians());
-        //
-        //     new_transform.translation = new_transform.translation.round();
-        //     moved = true;
-        // }
-
-        // if keyboard.just_pressed(KeyCode::KeyE) {
-        //     new_transform.rotate_y(-ROTATION_DEGREES.to_radians());
-        //     new_transform.translation = new_transform.translation.round();
-        //     moved = true;
-        // }
-
-        if keyboard.just_pressed(KeyCode::KeyZ) {  }
-
         if moved {
             if is_valid_position(&new_transform, &game_grid) {
                 *transform = new_transform;
@@ -94,6 +81,7 @@ pub fn falling(
             if !is_valid_position(&new_transform, &game_grid) {
                 commands.entity(entity)
                     .remove::<Falling>()
+                    .remove::<Active>()
                     .insert(Stopped);
             } else {
 
@@ -102,6 +90,22 @@ pub fn falling(
         }
     }
 }
+
+    pub fn handle_despawn_event(
+        mut commands: Commands,
+        mut event_reader: EventReader<RowCleaned>,
+        query: Query<(Entity, &Transform), (With<Tetromino>, With<Stopped>)>,
+    ) {
+        for event in event_reader.read() {
+            let row_number = event.0;
+
+            for (tetromino, transform) in query.iter() {
+              if transform.translation.y == (row_number + 1) as f32 {
+                  commands.entity(tetromino).remove::<Stopped>().insert(Falling { timer: Timer::from_seconds(FALL_TIME, TimerMode::Repeating) });
+              }
+            }
+        }
+    }
 
 pub fn get_tetromino_block_positions(parent_transform: &Transform) -> Vec<Vec3> {
     let mut positions = Vec::new();

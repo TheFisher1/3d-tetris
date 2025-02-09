@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use crate::game_state::{Falling, GameCamera, MovementCooldown, RotateButton, Tetromino, BLOCK_SIZE, CAMERA_HEIGHT, COLORS, FALL_TIME, GRID_DEPTH, GRID_HEIGHT, GRID_WIDTH};
+use crate::game_state::{Active, Falling, GameCamera, MovementCooldown, RotateButton, Tetromino, BLOCK_SIZE, CAMERA_HEIGHT, COLORS, FALL_TIME, GRID_DEPTH, GRID_HEIGHT, GRID_WIDTH};
 
 pub fn setup(
     mut commands: Commands,
@@ -199,6 +199,7 @@ pub fn spawn_tetromino(
                 adjusted_position.z
             ),
             Tetromino { id: 0 },
+            Active,
             Falling {
                 timer: Timer::from_seconds(FALL_TIME, TimerMode::Repeating),
             },
@@ -343,6 +344,7 @@ pub fn spawn_new_tetromino(
                     adjusted_position.z
                 ),
                 Tetromino { id: 1 },
+                Active,
                 Falling {
                     timer: Timer::from_seconds(FALL_TIME, TimerMode::Repeating),
                 },

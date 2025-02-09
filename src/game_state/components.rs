@@ -14,6 +14,9 @@ pub struct Falling {
 }
 
 #[derive(Component)]
+pub struct Active;
+
+#[derive(Component)]
 pub struct Stopped;
 
 #[derive(Component)]
@@ -33,5 +36,4 @@ pub enum RotateButton {
     Right,
     Down,
     Up,
-
 }
