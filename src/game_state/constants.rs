@@ -2,8 +2,8 @@ use bevy::prelude::Color;
 
 pub const BLOCK_SIZE: f32 = 1.0;
 pub const GRID_WIDTH: u32 = 10;
-pub const GRID_HEIGHT: u32 = 20;
-pub const GRID_DEPTH: u32 = 10;
+pub const GRID_HEIGHT: u32 = 10;
+pub const GRID_DEPTH: u32 = 8;
 pub const FALL_TIME: f32 = 1.0;
 pub const ROTATION_DEGREES: f32 = 90.0;
 pub const CAMERA_HEIGHT: f32 = 20.0;

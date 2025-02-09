@@ -22,7 +22,7 @@ pub fn keyboard_system(
                 highest_valid_y_reached = false;
             }
         }
-        
+
         transform.translation.y = highest_valid_y;
         return;
     }
@@ -65,7 +65,7 @@ pub fn keyboard_system(
         //     new_transform.translation = new_transform.translation.round();
         //     moved = true;
         // }
-        
+
         if keyboard.just_pressed(KeyCode::KeyZ) {  }
 
         if moved {

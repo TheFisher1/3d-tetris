@@ -12,7 +12,7 @@ pub fn setup(
         Transform::from_xyz(
             GRID_WIDTH as f32 / 2.0,
             CAMERA_HEIGHT,
-            GRID_DEPTH as f32 * 1.5,
+            GRID_DEPTH as f32,
         ).looking_at(
                 Vec3::new(GRID_WIDTH as f32 / 2.0, 5.0, GRID_DEPTH as f32 / 2.0),
                 Vec3::Y,
@@ -180,9 +180,9 @@ pub fn spawn_tetromino(
 ) {
     // Adjust position to be relative to grid center
     let adjusted_position = Vec3::new(
-        position.x - (GRID_WIDTH as f32 / 2.0),
+        position.x - (GRID_WIDTH as f32 / 2.0).round(),
         position.y,
-        position.z - (GRID_DEPTH as f32 / 2.0),
+        position.z - (GRID_DEPTH as f32 / 2.0).round(),
     );
 
     let block_mesh = meshes.add(Mesh::from(Cuboid::new(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE)));// { size: BLOCK_SIZE }));
