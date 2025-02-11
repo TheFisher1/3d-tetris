@@ -8,30 +8,24 @@ pub fn cleanup(
     mut commands: Commands,
     mut game_grid: ResMut<GameGrid>,
     mut event_writer: EventWriter<RowCleaned>,
-    tetromino_query: Query<(Entity, &Transform, &Children), (With<Tetromino>, With<Stopped>)>,
+    tetromino_query: Query<(Entity, &Transform), (With<Stopped>)>,
     transform_query: Query<&Transform>,
 ) {
     for y in 1..GRID_HEIGHT-1 {
         if game_grid.is_row_occupied(y) {
             game_grid.clear_row(y);
 
-            for (_, tetromino_transform, children) in tetromino_query.iter() {
-                for &child in children.iter() {
-                    if let Ok(child_transform) = transform_query.get(child) {
-                        let block_world_position = calculate_world_position(child_transform, tetromino_transform);
+            for (entity, tetromino_transform) in tetromino_query.iter() {
 
-                        if block_world_position.y == y as f32 {
-                            commands.entity(child).despawn();
-                            println!("Block at y = {} is at the desired position!", block_world_position.y);
+                        if tetromino_transform.translation.y == y as f32 {
+                            commands.entity(entity).despawn();
+                            println!("Block at y = {} is at the desired position!", tetromino_transform.translation.y);
                         }
                     }
                 }
-            }
-
             event_writer.send(RowCleaned(y));
         }
     }
-}
 
 pub fn calculate_world_position(child_transform: &Transform, tetromino_transform: &Transform) -> Vec3 {
     let local_position = child_transform.translation;

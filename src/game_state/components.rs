@@ -6,6 +6,11 @@ pub struct Tetromino {
 }
 
 #[derive(Component)]
+pub struct TetrominoBlock {
+    pub id: isize
+}
+
+#[derive(Component)]
 pub struct GridWall;
 
 #[derive(Component)]

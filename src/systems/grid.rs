@@ -1,6 +1,6 @@
 use bevy::prelude::*;
-use crate::game_state::{GameGrid, GridWall, Stopped, Tetromino, BLOCK_SIZE, GRID_DEPTH, GRID_HEIGHT, GRID_WIDTH};
-use crate::systems::{get_grid_position, get_tetromino_block_positions};
+use crate::game_state::{GameGrid, GridWall, Stopped, Tetromino, TetrominoBlock, BLOCK_SIZE, GRID_DEPTH, GRID_HEIGHT, GRID_WIDTH};
+use crate::systems::{get_grid_position};
 
 pub fn spawn_grid(
     mut commands: Commands,
@@ -97,13 +97,12 @@ pub fn spawn_grid(
 
 pub fn update_grid_state(
     mut game_grid: ResMut<GameGrid>,
-    query: Query<(&Transform, &Tetromino), Added<Stopped>>,
+    query: Query<(&Transform, &TetrominoBlock), Added<Stopped>>,
 ) {
-    for (transform, tetromino) in query.iter() {
-        for block_pos in get_tetromino_block_positions(transform) {
-            let (grid_x, grid_y, grid_z) = get_grid_position(block_pos);
+    for (transform, block) in query.iter() {
 
-            game_grid.set_cell(grid_x, grid_y, grid_z, tetromino.id);
+        let rotated_translation = transform.rotation * transform.translation;
+        let (grid_x, grid_y, grid_z) = (rotated_translation.x, rotated_translation.y, rotated_translation.z);
+            game_grid.set_cell(grid_x as i32, grid_y as i32, grid_z as i32, block.id);
         }
     }
-}

@@ -5,7 +5,8 @@ use bevy::prelude::*;
 use crate::game_state::resources::GameGrid;
 use crate::game_state::resources::*;
 use crate::systems::setup::{setup, spawn_new_tetromino};
-use crate::systems::{falling, cleanup, keyboard_system, rotate_camera, rotate_system, spawn_grid, update_grid_state, RowCleaned, handle_despawn_event};
+use crate::systems::{falling, cleanup, rotate_camera, rotate_system, spawn_grid, update_grid_state, RowCleaned, handle_despawn_event};
+use crate::systems::keyboard_system;
 
 pub struct TetrisPlugin;
 

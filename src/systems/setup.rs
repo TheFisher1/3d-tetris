@@ -208,7 +208,7 @@ pub fn spawn_tetromino(
             },
         ))
         .with_children(|parent| {
-            for i in 0..4 {
+            for i in 0..2 {
                 parent.spawn(PbrBundle {
                     mesh: Mesh3d::from(block_mesh.clone()),
                     material: MeshMaterial3d::from(block_material.clone()),
@@ -353,7 +353,7 @@ pub fn spawn_new_tetromino(
                 },
             ))
             .with_children(|parent| {
-                for i in 0..4 {
+                for i in 0..2 {
                     parent.spawn(PbrBundle {
                         mesh: Mesh3d::from(block_mesh.clone()),
                         material: MeshMaterial3d::from(block_material.clone()),
