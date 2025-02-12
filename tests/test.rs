@@ -13,14 +13,24 @@ mod tests {
 
         let game_grid = GameGrid::new();
 
-        let parent_entity = app.world_mut().spawn((Transform::from_xyz(1.0, 1.0, 1.0),)).id();
-        let child_entity = app.world_mut().spawn((Transform::from_xyz(2.0, 2.0, 2.0),)).id();
+        let parent_entity = app
+            .world_mut()
+            .spawn((Transform::from_xyz(1.0, 1.0, 1.0),))
+            .id();
+        let child_entity = app
+            .world_mut()
+            .spawn((Transform::from_xyz(2.0, 2.0, 2.0),))
+            .id();
 
-        app.world().entity_mut(parent_entity).add_children(&[child_entity]);
+        app.world()
+            .entity_mut(parent_entity)
+            .add_children(&[child_entity]);
 
         app.insert_resource(GameGrid::new());
 
-        let transform_query = app.world().query_filtered::<&Transform, Without<Tetromino>>();
+        let transform_query = app
+            .world()
+            .query_filtered::<&Transform, Without<Tetromino>>();
 
         let children = app.world().get::<Children>(parent_entity).unwrap();
 

@@ -6,7 +6,6 @@ use tetris::game::systems::cleanup::{cleanup, RowCleaned};
 mod tests {
     use super::*;
 
-
     #[test]
     fn test_row_clearing() {
         let mut app = App::new();

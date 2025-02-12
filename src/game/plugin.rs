@@ -2,20 +2,20 @@ use bevy::app::App;
 use bevy::app::Plugin;
 use bevy::app::Startup;
 
-use bevy::prelude::*;
 use crate::game::game_state::GameGrid;
+use bevy::prelude::*;
 
+use crate::game::systems::cleanup;
 use crate::game::systems::falling;
 use crate::game::systems::falling_blocks;
 use crate::game::systems::handle_despawn_event;
-use crate::game::systems::cleanup;
 use crate::game::systems::handle_despawn_event_blocks;
 use crate::game::systems::keyboard_system;
 use crate::game::systems::rotate_camera;
 use crate::game::systems::rotate_system;
-use crate::game::systems::setup::setup;
-use crate::game::systems::spawn_grid;
-use crate::game::systems::spawn_new_tetromino;
+use crate::game::systems::spawn::grid::spawn_grid;
+use crate::game::systems::spawn::setup::setup;
+use crate::game::systems::spawn::tetromino::spawn_new_tetromino;
 use crate::game::systems::update_grid_state;
 use crate::game::systems::RowCleaned;
 
