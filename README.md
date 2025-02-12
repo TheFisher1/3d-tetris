@@ -1,2 +1,2 @@
-# example-repo
-A simple project for 3d tetris in rust
+# 3D TETRIS
+A simplistic 3d tetris written in rust leveraging the capabilities of Bevy 0.15
