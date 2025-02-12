@@ -1,13 +1,16 @@
+use crate::game::game_state::{Active, Falling, GameGrid, MovementCooldown, Tetromino, BLOCK_SIZE};
+use crate::game::systems::is_valid_position;
 use bevy::input::ButtonInput;
 use bevy::prelude::*;
-use crate::game_state::{Active, Falling, GameGrid, MovementCooldown, Tetromino, BLOCK_SIZE};
-use crate::systems::is_valid_position;
 
 pub fn keyboard_system(
     time: Res<Time>,
     game_grid: Res<GameGrid>,
     keyboard: Res<ButtonInput<KeyCode>>,
-    mut query: Query<(&mut Transform, &mut MovementCooldown, &Tetromino, &Children), (With<Falling>, With<Active>)>,
+    mut query: Query<
+        (&mut Transform, &mut MovementCooldown, &Tetromino, &Children),
+        (With<Falling>, With<Active>),
+    >,
     transform_query: Query<&Transform, Without<Tetromino>>,
 ) {
     let (mut transform, mut cooldown, tetromino, children) = query.single_mut();

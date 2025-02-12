@@ -1,2 +1,2 @@
-mod systems;
-mod game_state;
+pub mod game;
+pub use game::*;

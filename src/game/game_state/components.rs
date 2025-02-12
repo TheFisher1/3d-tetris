@@ -2,12 +2,12 @@ use bevy::prelude::*;
 
 #[derive(Component)]
 pub struct Tetromino {
-    pub id: isize
+    pub id: isize,
 }
 
 #[derive(Component)]
 pub struct TetrominoBlock {
-    pub id: isize
+    pub id: isize,
 }
 
 #[derive(Component)]

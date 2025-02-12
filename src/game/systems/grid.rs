@@ -1,6 +1,5 @@
+use crate::game::game_state::*;
 use bevy::prelude::*;
-use crate::game_state::{GameGrid, GridWall, Stopped, Tetromino, TetrominoBlock, BLOCK_SIZE, GRID_DEPTH, GRID_HEIGHT, GRID_WIDTH};
-use crate::systems::{get_grid_position};
 
 pub fn spawn_grid(
     mut commands: Commands,
@@ -100,9 +99,12 @@ pub fn update_grid_state(
     query: Query<(&Transform, &TetrominoBlock), Added<Stopped>>,
 ) {
     for (transform, block) in query.iter() {
-
         let rotated_translation = transform.rotation * transform.translation;
-        let (grid_x, grid_y, grid_z) = (rotated_translation.x, rotated_translation.y, rotated_translation.z);
-            game_grid.set_cell(grid_x as i32, grid_y as i32, grid_z as i32, block.id);
-        }
+        let (grid_x, grid_y, grid_z) = (
+            rotated_translation.x,
+            rotated_translation.y,
+            rotated_translation.z,
+        );
+        game_grid.set_cell(grid_x as i32, grid_y as i32, grid_z as i32, block.id);
     }
+}

@@ -1,15 +1,16 @@
+use crate::game::game_state::constants::{GRID_DEPTH, GRID_HEIGHT, GRID_WIDTH};
 use bevy::prelude::*;
-use crate::game_state::constants::{GRID_DEPTH, GRID_HEIGHT, GRID_WIDTH};
 //grid - int[][][], -1 - not visited, else - color = Colors[i],
 
 #[derive(Resource)]
 pub struct GameGrid {
-    cells: Vec<Vec<Vec<isize>>>
+    cells: Vec<Vec<Vec<isize>>>,
 }
 
 impl GameGrid {
     pub fn new() -> Self {
-        let cells = vec![vec![vec![-1; GRID_DEPTH as usize]; GRID_HEIGHT as usize]; GRID_WIDTH as usize];
+        let cells =
+            vec![vec![vec![-1; GRID_DEPTH as usize]; GRID_HEIGHT as usize]; GRID_WIDTH as usize];
         Self { cells }
     }
 
@@ -50,11 +51,8 @@ impl GameGrid {
             return true;
         }
 
-        (1..GRID_DEPTH).all(|x| {
-            (1..GRID_WIDTH).all(|z| {
-                !self.is_cell_empty(x as i32, y as i32, z as i32)
-            })
-        })
+        (1..GRID_DEPTH)
+            .all(|x| (1..GRID_WIDTH).all(|z| !self.is_cell_empty(x as i32, y as i32, z as i32)))
     }
 
     pub fn clear_row(&mut self, y: u32) {
@@ -69,4 +67,3 @@ impl GameGrid {
         })
     }
 }
-
