@@ -25,13 +25,3 @@ pub fn cleanup(
         }
     }
 }
-
-pub fn calculate_world_position(
-    child_transform: &Transform,
-    tetromino_transform: &Transform,
-) -> Vec3 {
-    let local_position = child_transform.translation;
-    let rotated_position = tetromino_transform.rotation * local_position;
-
-    tetromino_transform.translation + rotated_position
-}

@@ -13,7 +13,7 @@ pub fn keyboard_system(
     >,
     transform_query: Query<&Transform, Without<Tetromino>>,
 ) {
-    let (mut transform, mut cooldown, tetromino, children) = query.single_mut();
+    if let Ok((mut transform, mut cooldown, _, children)) = query.get_single_mut() {
 
     if keyboard.just_pressed(KeyCode::Space) {
         let mut test_transform = transform.clone();
@@ -67,4 +67,5 @@ pub fn keyboard_system(
             cooldown.timer.reset();
         }
     }
+}
 }

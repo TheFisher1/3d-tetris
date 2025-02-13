@@ -63,30 +63,14 @@ pub fn falling_blocks(
         let mut new_transform = transform.clone();
         new_transform.translation.y -= BLOCK_SIZE;
 
-        // Convert world position to grid position
         let (grid_x, grid_y, grid_z) = get_grid_position(new_transform.translation);
 
-        // Check if the new position is valid
         if grid_y <= 1 || !game_grid.is_cell_empty(grid_x, grid_y - 1, grid_z) {
             commands.entity(entity).remove::<Falling>().insert(Stopped);
         } else {
             *transform = new_transform;
         }
     }
-}
-
-fn is_valid_position_block(transform: &Transform, game_grid: &Res<GameGrid>) -> bool {
-    transform.translation.x < GRID_WIDTH as f32
-        && transform.translation.y < GRID_HEIGHT as f32
-        && transform.translation.z < GRID_DEPTH as f32
-        && transform.translation.z > 0f32
-        && transform.translation.y > 0.0f32
-        && transform.translation.z > 0.0f32
-        && game_grid.is_cell_empty(
-            transform.translation.x as i32,
-            transform.translation.y as i32,
-            transform.translation.z as i32,
-        )
 }
 
 pub fn handle_despawn_event(
@@ -123,18 +107,14 @@ pub fn handle_despawn_event_blocks(
             let current_y = transform.translation.y;
 
             if current_y > row_number as f32 {
-                // Clear the current position in grid before moving
                 let (grid_x, grid_y, grid_z) = get_grid_position(transform.translation);
                 game_grid.set_cell(grid_x, grid_y, grid_z, -1);
 
-                // Move the block down one unit
                 transform.translation.y -= BLOCK_SIZE;
 
                 let (grid_x, grid_y, grid_z) = get_grid_position(transform.translation);
 
-                // If the new position is valid
                 if grid_y > 0 && game_grid.is_cell_empty(grid_x, grid_y, grid_z) {
-                    // Remove Stopped and add Falling component
                     commands.entity(entity).remove::<Stopped>().insert(Falling {
                         timer: Timer::from_seconds(FALL_TIME, TimerMode::Repeating),
                     });

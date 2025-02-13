@@ -19,12 +19,12 @@ pub fn rotate_camera(
 
         if keyboard.pressed(KeyCode::ArrowUp) {
             camera.height += ROTATION_SPEED * 10.0 * dt;
-            camera.height = camera.height.min(50.0); // Maximum height
+            camera.height = camera.height.min(50.0);
         }
 
         if keyboard.pressed(KeyCode::ArrowDown) {
             camera.height -= ROTATION_SPEED * 10.0 * dt;
-            camera.height = camera.height.max(5.0); // Minimum height
+            camera.height = camera.height.max(5.0);
         }
 
         let x = camera.angle.cos() * CAMERA_RADIUS;
