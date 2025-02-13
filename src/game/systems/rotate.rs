@@ -3,6 +3,8 @@ use crate::game::systems::is_valid_position;
 use bevy::math::Dir3;
 use bevy::prelude::{Button, Changed, Children, Interaction, Query, Res, Transform, With, Without};
 
+use super::is_valid_position_tetromino;
+
 pub fn rotate_system(
     mut interaction_query: Query<
         (&Interaction, &RotateButton),
@@ -12,9 +14,9 @@ pub fn rotate_system(
     transform_query: Query<&Transform, Without<Tetromino>>,
     game_grid: Res<GameGrid>,
 ) {
-    for (interaction, button) in &mut interaction_query {
+    if let Ok((interaction, button)) = interaction_query.get_single_mut() {
         if *interaction == Interaction::Pressed {
-            if let Ok((mut transform, children)) = piece_query.get_single_mut() {
+            for (mut transform, children) in piece_query.iter_mut() {
                 handle_rotate(
                     button,
                     &mut transform,
@@ -90,7 +92,7 @@ fn rotate_transform(
     let mut new_transform = transform.clone();
     new_transform.rotate_axis(rotation_axis, rotation_degrees_radians);
 
-    if !is_valid_position(&new_transform, &game_grid, children, transform_query) {
+    if !is_valid_position_tetromino(&new_transform, &game_grid, children, transform_query) {
         return;
     }
 

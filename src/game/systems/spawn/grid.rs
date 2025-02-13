@@ -1,8 +1,8 @@
 use crate::game::game_state::{GridWall, BLOCK_SIZE, GRID_DEPTH, GRID_HEIGHT, GRID_WIDTH};
 use bevy::asset::Assets;
 use bevy::color::Color;
-use bevy::pbr::{MeshMaterial3d, PbrBundle, StandardMaterial};
-use bevy::prelude::{default, AlphaMode, Commands, Cuboid, Mesh, Mesh3d, ResMut, Transform};
+use bevy::pbr::{MeshMaterial3d, StandardMaterial};
+use bevy::prelude::{default, AlphaMode, Commands, Cuboid, Mesh, Mesh3d, ResMut, Transform, PbrBundle};
 
 pub fn spawn_grid(
     mut commands: Commands,
@@ -11,7 +11,7 @@ pub fn spawn_grid(
 ) {
     let wall_mesh = meshes.add(Mesh::from(Cuboid::new(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE)));
     let wall_material = materials.add(StandardMaterial {
-        base_color: Color::rgba(0.5, 0.5, 0.5, 0.2),
+        base_color: Color::srgba(0.5, 0.5, 0.5, 0.2),
         alpha_mode: AlphaMode::Blend,
         ..default()
     });
@@ -55,7 +55,7 @@ pub fn spawn_grid(
     }
 
     let y = GRID_HEIGHT;
-    // Spawn X-axis edges
+    
     for x in 0..=GRID_WIDTH {
         for z in [0, GRID_DEPTH] {
             commands.spawn((

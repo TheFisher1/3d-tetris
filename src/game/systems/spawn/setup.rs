@@ -22,7 +22,6 @@ pub fn setup(
         },
     ));
 
-    // Light
     commands.spawn((
         PointLight {
             intensity: 1500.0,
@@ -42,7 +41,6 @@ pub fn setup(
             ..default()
         })
         .with_children(|parent| {
-            // Left rotation button
             parent
                 .spawn((
                     Button,
@@ -112,14 +110,13 @@ pub fn spawn_tetromino(
     materials: &mut ResMut<Assets<StandardMaterial>>,
     position: Vec3,
 ) {
-    // Adjust position to be relative to grid center
     let adjusted_position = Vec3::new(
         position.x - (GRID_WIDTH as f32 / 2.0).round(),
         position.y,
         position.z - (GRID_DEPTH as f32 / 2.0).round(),
     );
 
-    let block_mesh = meshes.add(Mesh::from(Cuboid::new(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE))); // { size: BLOCK_SIZE }));
+    let block_mesh = meshes.add(Mesh::from(Cuboid::new(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE)));
     let block_material = materials.add(StandardMaterial {
         base_color: COLORS[0].clone(),
         ..default()

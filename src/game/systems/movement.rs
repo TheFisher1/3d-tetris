@@ -22,7 +22,7 @@ pub fn falling(
         let mut new_transform = transform.clone();
         new_transform.translation.y -= BLOCK_SIZE;
 
-        if !is_valid_position(&new_transform, &game_grid, children, &transform_query) {
+        if !is_valid_position_tetromino(&new_transform, &game_grid, children, &transform_query) {
             commands
                 .entity(entity)
                 .remove::<Falling>()
@@ -124,33 +124,36 @@ pub fn handle_despawn_event_blocks(
     }
 }
 
-pub fn is_valid_position(
+pub fn is_valid_position(world_position: &Vec3, game_grid: &GameGrid) -> bool {
+    let [grid_x, grid_y, grid_z] = world_position.to_array().map(|x| x.round() as i32);
+    if grid_x < 1
+        || grid_x >= GRID_WIDTH as i32
+        || grid_y < 1
+        || grid_y >= GRID_HEIGHT as i32
+        || grid_z < 1
+        || grid_z >= GRID_DEPTH as i32
+    {
+        return false;
+    }
+
+    game_grid.is_cell_empty(grid_x, grid_y, grid_z)
+}
+
+pub fn is_valid_position_tetromino(
     transform: &Transform,
     game_grid: &GameGrid,
     children: &Children,
     transform_query: &Query<&Transform, Without<Tetromino>>,
 ) -> bool {
-    for &child in children.iter() {
+    children.iter().all(|&child| {
         if let Ok(child_transform) = transform_query.get(child) {
             let world_pos = transform.transform_point(child_transform.translation);
-            let (grid_x, grid_y, grid_z) = get_grid_position(world_pos);
-
-            if grid_x <= 0
-                || grid_x >= GRID_WIDTH as i32
-                || grid_y <= 0
-                || grid_y >= GRID_HEIGHT as i32
-                || grid_z <= 0
-                || grid_z >= GRID_DEPTH as i32
-            {
-                return false;
-            }
-
-            if !game_grid.is_cell_empty(grid_x, grid_y, grid_z) {
-                return false;
-            }
+            println!("{:?} -> {:?}, world_pos: {:?}", child, child_transform, world_pos);
+            is_valid_position(&world_pos, &game_grid)
+        } else {
+            false
         }
-    }
-    true
+    })
 }
 
 pub fn get_grid_position(world_pos: Vec3) -> (i32, i32, i32) {
