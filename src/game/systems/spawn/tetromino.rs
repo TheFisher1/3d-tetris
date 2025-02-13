@@ -50,19 +50,12 @@ pub fn spawn_new_tetromino(
             Visibility::default(),
         ))
         .with_children(|parent| {
-            for i in 0..4 {
+            for i in 0..2 {
                 parent.spawn((
                     Mesh3d::from(block_mesh.clone()),
                     MeshMaterial3d::from(block_material.clone()),
-                    Transform::from_translation(TETROMINO_OFFSETS[1][i]),
+                    Transform::from_translation(TETROMINO_OFFSETS[0][i]),
                 ));
             }
         });
-
-    // parent.spawn(PbrBundle {
-    //     mesh: Mesh3d::from(block_mesh.clone()),
-    //     material: MeshMaterial3d::from(block_material.clone()),
-    //     transform: Transform::from_translation(TETROMINO_OFFSETS[1][i]),//Transform::from_xyz(i as f32, 0.0, 0.0),
-    //     ..default()
-    // });
 }

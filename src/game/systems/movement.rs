@@ -52,7 +52,7 @@ pub fn falling_blocks(
     time: Res<Time>,
     game_grid: Res<GameGrid>,
     mut commands: Commands,
-    mut query: Query<(Entity, &mut Transform, &mut Falling), (With<TetrominoBlock>)>,
+    mut query: Query<(Entity, &mut Transform, &mut Falling), With<TetrominoBlock>>,
 ) {
     for (entity, mut transform, mut falling) in query.iter_mut() {
         falling.timer.tick(time.delta());
@@ -156,8 +156,6 @@ pub fn is_valid_position_tetromino(
 }
 
 pub fn get_grid_position(world_pos: Vec3) -> (i32, i32, i32) {
-    let grid_x = world_pos.x.round() as i32;
-    let grid_y = world_pos.y.round() as i32;
-    let grid_z = world_pos.z.round() as i32;
-    (grid_x, grid_y, grid_z)
+    let [x, y, z] = world_pos.to_array().map(|x| x.round() as i32);
+    (x, y, z)
 }

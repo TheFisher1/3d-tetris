@@ -7,6 +7,7 @@ pub mod movement;
 pub mod rotate;
 pub mod settings;
 pub mod spawn;
+mod setup;
 
 pub use camera::*;
 pub use cleanup::*;

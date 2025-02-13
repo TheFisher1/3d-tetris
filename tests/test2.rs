@@ -28,7 +28,7 @@ mod tests {
         app.update();
 
         let row_cleaned_events = app.world().resource::<Events<RowCleaned>>();
-        let mut reader = row_cleaned_events.get_reader();
+        let mut reader = row_cleaned_events.get_cursor();
         assert_eq!(reader.read(row_cleaned_events).count(), 1);
 
         let mut game_grid = app.world_mut().resource_mut::<GameGrid>();
@@ -37,7 +37,7 @@ mod tests {
         app.update();
 
         let row_cleaned_events = app.world().resource::<Events<RowCleaned>>();
-        let mut reader = row_cleaned_events.get_reader();
+        let mut reader = row_cleaned_events.get_cursor();
         let events: Vec<_> = reader.read(row_cleaned_events).collect();
 
         assert_eq!(events.len(), 1);
@@ -69,7 +69,7 @@ mod tests {
         app.update();
 
         let row_cleaned_events = app.world().resource::<Events<RowCleaned>>();
-        let mut reader = row_cleaned_events.get_reader();
+        let mut reader = row_cleaned_events.get_cursor();
         let events: Vec<_> = reader.read(row_cleaned_events).collect();
 
         assert_eq!(events.len(), 2);

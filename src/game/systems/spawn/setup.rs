@@ -81,6 +81,8 @@ pub fn setup(
                 NodeSettings::new(150.0, 65.0)
                     .border(UiRect::all(Val::Px(5.0)))
                     .position_type(PositionType::Absolute)
+                    .justify_content(JustifyContent::Center)
+                    .align_items(AlignItems::Center)
                     .bottom(35.0)
                     .right(35.0),
             );
@@ -92,21 +94,36 @@ pub fn setup(
                 NodeSettings::new(150.0, 65.0)
                     .border(UiRect::all(Val::Px(5.0)))
                     .position_type(PositionType::Absolute)
+                    .justify_content(JustifyContent::Center)
+                    .align_items(AlignItems::Center)
                     .bottom(35.0)
                     .right(450.0),
             );
+
+            spawn_button(
+                parent,
+                "Down",
+                RotateButton::Down,
+                NodeSettings::new(150.0, 65.0)
+                    .border(UiRect::all(Val::Px(5.0)))
+                    .justify_content(JustifyContent::Center)
+                    .align_items(AlignItems::Center)
+                    .position_type(PositionType::Absolute)
+                    .bottom(35.0)
+                    .right(1000.0),
+            )
         });
 
-    spawn_tetromino(
-        &mut commands,
-        &mut meshes,
-        &mut materials,
-        Vec3::new(
-            GRID_WIDTH as f32,
-            GRID_HEIGHT as f32 - 2.0,
-            GRID_DEPTH as f32,
-        ),
-    );
+    // spawn_tetromino(
+    //     &mut commands,
+    //     &mut meshes,
+    //     &mut materials,
+    //     Vec3::new(
+    //         GRID_WIDTH as f32,
+    //         GRID_HEIGHT as f32 - 2.0,
+    //         GRID_DEPTH as f32,
+    //     ),
+    // );
 }
 
 pub fn spawn_tetromino(

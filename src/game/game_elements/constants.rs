@@ -1,5 +1,5 @@
-use bevy::math::{Vec3, Vec3A};
-use bevy::prelude::{Color, Vec2};
+use bevy::math::{Vec3};
+use bevy::prelude::{Color};
 
 pub const BLOCK_SIZE: f32 = 1.0;
 pub const GRID_WIDTH: u32 = 6;
