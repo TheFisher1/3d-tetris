@@ -2,7 +2,9 @@ use crate::game::game_state::{GridWall, BLOCK_SIZE, GRID_DEPTH, GRID_HEIGHT, GRI
 use bevy::asset::Assets;
 use bevy::color::Color;
 use bevy::pbr::{MeshMaterial3d, StandardMaterial};
-use bevy::prelude::{default, AlphaMode, Commands, Cuboid, Mesh, Mesh3d, ResMut, Transform, PbrBundle};
+use bevy::prelude::{
+    default, AlphaMode, Commands, Cuboid, Mesh, Mesh3d, PbrBundle, ResMut, Transform,
+};
 
 pub fn spawn_grid(
     mut commands: Commands,
@@ -55,7 +57,7 @@ pub fn spawn_grid(
     }
 
     let y = GRID_HEIGHT;
-    
+
     for x in 0..=GRID_WIDTH {
         for z in [0, GRID_DEPTH] {
             commands.spawn((

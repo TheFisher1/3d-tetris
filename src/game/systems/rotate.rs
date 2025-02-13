@@ -1,5 +1,4 @@
 use crate::game::game_state::{Falling, GameGrid, RotateButton, Tetromino, ROTATION_DEGREES};
-use crate::game::systems::is_valid_position;
 use bevy::math::Dir3;
 use bevy::prelude::{Button, Changed, Children, Interaction, Query, Res, Transform, With, Without};
 

@@ -148,7 +148,6 @@ pub fn is_valid_position_tetromino(
     children.iter().all(|&child| {
         if let Ok(child_transform) = transform_query.get(child) {
             let world_pos = transform.transform_point(child_transform.translation);
-            println!("{:?} -> {:?}, world_pos: {:?}", child, child_transform, world_pos);
             is_valid_position(&world_pos, &game_grid)
         } else {
             false

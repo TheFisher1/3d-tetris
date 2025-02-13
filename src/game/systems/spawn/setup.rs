@@ -7,6 +7,7 @@ pub fn setup(
     mut commands: Commands,
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<StandardMaterial>>,
+    asset_server: Res<AssetServer>,
 ) {
     commands.spawn((
         Camera3d::default(),
@@ -30,6 +31,10 @@ pub fn setup(
         },
         Transform::from_xyz(4.0, 8.0, 4.0),
         GlobalTransform::default(),
+    ));
+
+    commands.spawn(AudioPlayer::<AudioSource>::new(
+        asset_server.load("sounds/Original Tetris Sound.ogg"),
     ));
 
     commands
@@ -137,6 +142,7 @@ pub fn spawn_tetromino(
             MovementCooldown {
                 timer: Timer::from_seconds(0.1, TimerMode::Once),
             },
+            Visibility::default(),
         ))
         .with_children(|parent| {
             for i in 0..2 {

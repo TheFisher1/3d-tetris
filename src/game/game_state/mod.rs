@@ -1,7 +1,7 @@
 pub mod components;
 pub mod constants;
-pub mod resources;
+pub mod game_grid;
 
 pub use components::*;
 pub use constants::*;
-pub use resources::*;
+pub use game_grid::*;
