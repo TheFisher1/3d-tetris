@@ -1,4 +1,4 @@
-use crate::game::game_state::constants::{GRID_DEPTH, GRID_HEIGHT, GRID_WIDTH};
+use crate::game::game_elements::constants::{GRID_DEPTH, GRID_HEIGHT, GRID_WIDTH};
 use bevy::prelude::*;
 //grid - int[][][], -1 - not visited, else - color = Colors[i],
 

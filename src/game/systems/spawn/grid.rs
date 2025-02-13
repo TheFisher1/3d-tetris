@@ -1,4 +1,4 @@
-use crate::game::game_state::{GridWall, BLOCK_SIZE, GRID_DEPTH, GRID_HEIGHT, GRID_WIDTH};
+use crate::game::game_elements::{GridWall, BLOCK_SIZE, GRID_DEPTH, GRID_HEIGHT, GRID_WIDTH};
 use bevy::asset::Assets;
 use bevy::color::Color;
 use bevy::pbr::{MeshMaterial3d, StandardMaterial};

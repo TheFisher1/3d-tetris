@@ -1,4 +1,4 @@
-use crate::game::game_state::{GameGrid, Stopped, TetrominoBlock, GRID_HEIGHT};
+use crate::game::game_elements::{GameGrid, Stopped, TetrominoBlock, GRID_HEIGHT};
 use bevy::prelude::*;
 
 #[derive(Event)]

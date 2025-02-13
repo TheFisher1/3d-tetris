@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use tetris::game::game_state::{GameGrid, GRID_DEPTH, GRID_WIDTH};
+use tetris::game::game_elements::{GameGrid, GRID_DEPTH, GRID_WIDTH};
 use tetris::game::systems::cleanup::{cleanup, RowCleaned};
 
 #[cfg(test)]

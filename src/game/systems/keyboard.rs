@@ -1,4 +1,6 @@
-use crate::game::game_state::{Active, Falling, GameGrid, MovementCooldown, Tetromino, BLOCK_SIZE};
+use crate::game::game_elements::{
+    Active, Falling, GameGrid, MovementCooldown, Tetromino, BLOCK_SIZE,
+};
 use crate::game::systems::is_valid_position;
 use bevy::input::ButtonInput;
 use bevy::prelude::*;

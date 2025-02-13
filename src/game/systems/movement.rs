@@ -1,4 +1,4 @@
-use crate::game::game_state::{
+use crate::game::game_elements::{
     Active, Falling, GameGrid, Stopped, Tetromino, TetrominoBlock, BLOCK_SIZE, FALL_TIME,
     GRID_DEPTH, GRID_HEIGHT, GRID_WIDTH,
 };

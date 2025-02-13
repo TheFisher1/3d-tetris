@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use tetris::game::game_state::{GameGrid, Tetromino, BLOCK_SIZE};
+use tetris::game::game_elements::{GameGrid, Tetromino, BLOCK_SIZE};
 use tetris::game::systems::movement::is_valid_position;
 
 #[cfg(test)]

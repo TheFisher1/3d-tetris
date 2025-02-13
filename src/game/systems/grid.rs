@@ -1,4 +1,4 @@
-use crate::game::game_state::*;
+use crate::game::game_elements::*;
 use bevy::prelude::*;
 
 pub fn update_grid_state(

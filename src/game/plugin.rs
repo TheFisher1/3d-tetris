@@ -2,7 +2,7 @@ use bevy::app::App;
 use bevy::app::Plugin;
 use bevy::app::Startup;
 
-use crate::game::game_state::GameGrid;
+use crate::game::game_elements::GameGrid;
 use bevy::prelude::*;
 
 use crate::game::systems::cleanup;
