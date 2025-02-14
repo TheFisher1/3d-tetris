@@ -2,7 +2,7 @@ use crate::game::game_elements::Tetromino;
 use bevy::prelude::{Resource, States};
 
 #[derive(States, Debug, Hash, PartialEq, Eq, Clone)]
-pub enum GameStatus {
+pub enum GameState {
     StartPage,
     Info,
     Playing,
@@ -10,16 +10,16 @@ pub enum GameStatus {
 }
 
 #[derive(Resource)]
-pub struct GameState {
+pub struct GameInfo {
     pub curr_tetromino: Tetromino,
     pub next_tetromino: Tetromino,
     pub level: u32,
     pub points: f32,
 }
 
-impl GameState {
+impl GameInfo {
     pub fn new(level: u32, points: f32) -> Self {
-        GameState {
+        GameInfo {
             next_tetromino: Tetromino { id: 0 },
             curr_tetromino: Tetromino { id: 1 },
             level,

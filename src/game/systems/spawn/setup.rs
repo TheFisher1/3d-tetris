@@ -5,8 +5,6 @@ use bevy::prelude::*;
 
 pub fn setup(
     mut commands: Commands,
-    mut meshes: ResMut<Assets<Mesh>>,
-    mut materials: ResMut<Assets<StandardMaterial>>,
     asset_server: Res<AssetServer>,
 ) {
     commands.spawn((
@@ -113,17 +111,6 @@ pub fn setup(
                     .right(1000.0),
             )
         });
-
-    // spawn_tetromino(
-    //     &mut commands,
-    //     &mut meshes,
-    //     &mut materials,
-    //     Vec3::new(
-    //         GRID_WIDTH as f32,
-    //         GRID_HEIGHT as f32 - 2.0,
-    //         GRID_DEPTH as f32,
-    //     ),
-    // );
 }
 
 pub fn spawn_tetromino(

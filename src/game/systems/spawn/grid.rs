@@ -3,7 +3,7 @@ use bevy::asset::Assets;
 use bevy::color::Color;
 use bevy::pbr::{MeshMaterial3d, StandardMaterial};
 use bevy::prelude::{
-    default, AlphaMode, Commands, Cuboid, Mesh, Mesh3d, PbrBundle, ResMut, Transform,
+    default, AlphaMode, Commands, Cuboid, Mesh, Mesh3d, ResMut, Transform,
 };
 
 pub fn spawn_grid(
@@ -21,17 +21,12 @@ pub fn spawn_grid(
     for x in 0..=GRID_WIDTH {
         for z in 0..=GRID_DEPTH {
             commands.spawn((
-                PbrBundle {
-                    mesh: Mesh3d::from(wall_mesh.clone()),
-                    material: MeshMaterial3d::from(wall_material.clone()),
-                    transform: Transform::from_xyz(
-                        x as f32 * BLOCK_SIZE,
-                        0.0,
-                        z as f32 * BLOCK_SIZE,
-                    ),
-                    ..default()
-                },
-                GridWall,
+                Mesh3d::from(wall_mesh.clone()),
+                MeshMaterial3d::from(wall_material.clone()),
+                Transform::from_xyz(x as f32 * BLOCK_SIZE,
+                                    0.0,
+                                    z as f32 * BLOCK_SIZE
+                ),
             ));
         }
     }
@@ -40,17 +35,12 @@ pub fn spawn_grid(
         for z in [0, GRID_DEPTH] {
             for y in 0..=GRID_HEIGHT {
                 commands.spawn((
-                    PbrBundle {
-                        mesh: Mesh3d::from(wall_mesh.clone()),
-                        material: MeshMaterial3d::from(wall_material.clone()),
-                        transform: Transform::from_xyz(
-                            x as f32 * BLOCK_SIZE,
-                            y as f32 * BLOCK_SIZE,
-                            z as f32 * BLOCK_SIZE,
-                        ),
-                        ..default()
-                    },
-                    GridWall,
+                    Mesh3d::from(wall_mesh.clone()),
+                    MeshMaterial3d::from(wall_material.clone()),
+                    Transform::from_xyz(x as f32 * BLOCK_SIZE,
+                                                    y as f32 * BLOCK_SIZE,
+                                                    z as f32 * BLOCK_SIZE
+                    ),
                 ));
             }
         }
@@ -61,36 +51,27 @@ pub fn spawn_grid(
     for x in 0..=GRID_WIDTH {
         for z in [0, GRID_DEPTH] {
             commands.spawn((
-                PbrBundle {
-                    mesh: Mesh3d::from(wall_mesh.clone()),
-                    material: MeshMaterial3d::from(wall_material.clone()),
-                    transform: Transform::from_xyz(
-                        x as f32 * BLOCK_SIZE,
-                        y as f32 * BLOCK_SIZE,
-                        z as f32 * BLOCK_SIZE,
-                    ),
-                    ..default()
-                },
-                GridWall,
-            ));
+                Mesh3d::from(wall_mesh.clone()),
+                MeshMaterial3d::from(wall_material.clone()),
+                Transform::from_xyz(x as f32 * BLOCK_SIZE,
+                                    y as f32 * BLOCK_SIZE,
+                                    z as f32 * BLOCK_SIZE
+                                   ),
+                               ));
         }
     }
 
     for z in 0..=GRID_DEPTH {
         for x in [0, GRID_WIDTH] {
             commands.spawn((
-                PbrBundle {
-                    mesh: Mesh3d::from(wall_mesh.clone()),
-                    material: MeshMaterial3d::from(wall_material.clone()),
-                    transform: Transform::from_xyz(
+                    Mesh3d::from(wall_mesh.clone()),
+                    MeshMaterial3d::from(wall_material.clone()),
+                    Transform::from_xyz(
                         x as f32 * BLOCK_SIZE,
                         y as f32 * BLOCK_SIZE,
                         z as f32 * BLOCK_SIZE,
                     ),
-                    ..default()
-                },
-                GridWall,
-            ));
+                ));
         }
     }
 }

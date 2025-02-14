@@ -22,12 +22,13 @@ pub const COLORS: [Color; 5] = [
 ];
 
 pub static TETROMINO_OFFSETS: &[&[Vec3]] = &[
+    // I
     &[
         Vec3 {
             x: 0.0,
             y: 0.0,
             z: 0.0,
-        }, // I
+        },
         Vec3 {
             x: 1.0,
             y: 0.0,
@@ -66,12 +67,13 @@ pub static TETROMINO_OFFSETS: &[&[Vec3]] = &[
             z: 1.0,
         },
     ],
+    // O
     &[
         Vec3 {
             x: 0.0,
             y: 0.0,
             z: 0.0,
-        }, // O
+        },
         Vec3 {
             x: 1.0,
             y: 0.0,
@@ -88,6 +90,7 @@ pub static TETROMINO_OFFSETS: &[&[Vec3]] = &[
             z: 0.0,
         },
     ],
+    // S
     &[
         Vec3 {
             x: 0.0,
