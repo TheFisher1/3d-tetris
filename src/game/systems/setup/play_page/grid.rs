@@ -1,10 +1,13 @@
-use crate::game::game_elements::{GridWall, BLOCK_SIZE, GRID_DEPTH, GRID_HEIGHT, GRID_WIDTH};
+use crate::game::game_elements::{BLOCK_SIZE, GRID_DEPTH, GRID_HEIGHT, GRID_WIDTH};
 use bevy::asset::Assets;
 use bevy::color::Color;
 use bevy::pbr::{MeshMaterial3d, StandardMaterial};
 use bevy::prelude::{
-    default, AlphaMode, Commands, Cuboid, Mesh, Mesh3d, ResMut, Transform,
+    default, AlphaMode, Commands, Component, Cuboid, Mesh, Mesh3d, ResMut, Transform,
 };
+
+#[derive(Component)]
+pub struct Grid;
 
 pub fn spawn_grid(
     mut commands: Commands,
@@ -23,10 +26,8 @@ pub fn spawn_grid(
             commands.spawn((
                 Mesh3d::from(wall_mesh.clone()),
                 MeshMaterial3d::from(wall_material.clone()),
-                Transform::from_xyz(x as f32 * BLOCK_SIZE,
-                                    0.0,
-                                    z as f32 * BLOCK_SIZE
-                ),
+                Transform::from_xyz(x as f32 * BLOCK_SIZE, 0.0, z as f32 * BLOCK_SIZE),
+                Grid,
             ));
         }
     }
@@ -37,10 +38,12 @@ pub fn spawn_grid(
                 commands.spawn((
                     Mesh3d::from(wall_mesh.clone()),
                     MeshMaterial3d::from(wall_material.clone()),
-                    Transform::from_xyz(x as f32 * BLOCK_SIZE,
-                                                    y as f32 * BLOCK_SIZE,
-                                                    z as f32 * BLOCK_SIZE
+                    Transform::from_xyz(
+                        x as f32 * BLOCK_SIZE,
+                        y as f32 * BLOCK_SIZE,
+                        z as f32 * BLOCK_SIZE,
                     ),
+                    Grid,
                 ));
             }
         }
@@ -53,25 +56,28 @@ pub fn spawn_grid(
             commands.spawn((
                 Mesh3d::from(wall_mesh.clone()),
                 MeshMaterial3d::from(wall_material.clone()),
-                Transform::from_xyz(x as f32 * BLOCK_SIZE,
-                                    y as f32 * BLOCK_SIZE,
-                                    z as f32 * BLOCK_SIZE
-                                   ),
-                               ));
+                Transform::from_xyz(
+                    x as f32 * BLOCK_SIZE,
+                    y as f32 * BLOCK_SIZE,
+                    z as f32 * BLOCK_SIZE,
+                ),
+                Grid,
+            ));
         }
     }
 
     for z in 0..=GRID_DEPTH {
         for x in [0, GRID_WIDTH] {
             commands.spawn((
-                    Mesh3d::from(wall_mesh.clone()),
-                    MeshMaterial3d::from(wall_material.clone()),
-                    Transform::from_xyz(
-                        x as f32 * BLOCK_SIZE,
-                        y as f32 * BLOCK_SIZE,
-                        z as f32 * BLOCK_SIZE,
-                    ),
-                ));
+                Mesh3d::from(wall_mesh.clone()),
+                MeshMaterial3d::from(wall_material.clone()),
+                Transform::from_xyz(
+                    x as f32 * BLOCK_SIZE,
+                    y as f32 * BLOCK_SIZE,
+                    z as f32 * BLOCK_SIZE,
+                ),
+                Grid,
+            ));
         }
     }
 }

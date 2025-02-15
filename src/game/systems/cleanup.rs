@@ -2,7 +2,7 @@ use crate::game::game_elements::{GameGrid, Stopped, TetrominoBlock, GRID_HEIGHT}
 use bevy::prelude::*;
 
 #[derive(Event)]
-pub struct RowCleaned(pub u32);
+pub struct RowCleaned(pub i32);
 
 pub fn cleanup(
     mut commands: Commands,
@@ -15,7 +15,7 @@ pub fn cleanup(
             game_grid.clear_row(y);
 
             for (entity, transform) in tetromino_query.iter() {
-                let block_y = transform.translation.y.round() as u32;
+                let block_y = transform.translation.y.round() as i32;
                 if block_y == y {
                     commands.entity(entity).despawn();
                 }

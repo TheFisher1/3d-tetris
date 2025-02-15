@@ -1,6 +1,6 @@
 use crate::game::game_elements::constants::{GRID_DEPTH, GRID_HEIGHT, GRID_WIDTH};
+use crate::game::game_elements::EMPTY_CELL;
 use bevy::prelude::*;
-//grid - int[][][], -1 - not visited, else - color = Colors[i],
 
 #[derive(Resource)]
 pub struct GameGrid {
@@ -27,7 +27,7 @@ impl GameGrid {
             return false;
         }
 
-        self.cells[x][y][z] == -1
+        self.cells[x][y][z] == EMPTY_CELL
     }
 
     pub fn set_cell(&mut self, x: i32, y: i32, z: i32, occupied: isize) {
@@ -42,7 +42,7 @@ impl GameGrid {
         }
     }
 
-    pub fn is_row_occupied(&self, y: u32) -> bool {
+    pub fn is_row_occupied(&self, y: i32) -> bool {
         if y == 0 {
             return true;
         }
@@ -55,14 +55,24 @@ impl GameGrid {
             .all(|x| (1..GRID_WIDTH).all(|z| !self.is_cell_empty(x as i32, y as i32, z as i32)))
     }
 
-    pub fn clear_row(&mut self, y: u32) {
+    pub fn clear_row(&mut self, y: i32) {
         if y == 0 || y == GRID_HEIGHT {
             return;
         }
 
         (1..GRID_DEPTH).for_each(|x| {
             (1..GRID_WIDTH).for_each(|z| {
-                self.set_cell(x as i32, y as i32, z as i32, -1);
+                self.set_cell(x, y, z, EMPTY_CELL);
+            })
+        })
+    }
+
+    pub fn reset(&mut self) {
+        (1..GRID_DEPTH).for_each(|x| {
+            (1..GRID_HEIGHT).for_each(|y| {
+                (1..GRID_WIDTH).for_each(|z| {
+                    self.set_cell(x, y, z, EMPTY_CELL);
+                })
             })
         })
     }

@@ -1,22 +1,37 @@
+use crate::game::game_elements::POINTS_DELTA_PER_ROW;
 use crate::game::game_elements::{
     Active, Falling, GameGrid, Stopped, Tetromino, TetrominoBlock, BLOCK_SIZE, FALL_TIME,
     GRID_DEPTH, GRID_HEIGHT, GRID_WIDTH,
 };
+use crate::game::state::game_info::GameInfo;
 use crate::game::systems::RowCleaned;
+use crate::game::JustSpawned;
 use bevy::prelude::*;
 
 pub fn falling(
     time: Res<Time>,
     game_grid: Res<GameGrid>,
     mut commands: Commands,
-    mut query: Query<(Entity, &mut Transform, &mut Falling, &Tetromino, &Children)>,
+    mut query: Query<(
+        Entity,
+        &mut Transform,
+        &mut Falling,
+        &Tetromino,
+        &Children,
+        Option<&JustSpawned>,
+    )>,
     transform_query: Query<&Transform, Without<Tetromino>>,
 ) {
-    for (entity, mut transform, mut falling, tetromino, children) in query.iter_mut() {
+    for (entity, mut transform, mut falling, tetromino, children, is_just_spawned) in
+        query.iter_mut()
+    {
         falling.timer.tick(time.delta());
-
         if !falling.timer.just_finished() {
             return;
+        }
+
+        if is_just_spawned.is_some() {
+            commands.entity(entity).remove::<JustSpawned>();
         }
 
         let mut new_transform = transform.clone();
@@ -34,7 +49,7 @@ pub fn falling(
 
                     commands
                         .entity(child)
-                        .remove_parent()
+                        .remove_parent_in_place()
                         .insert(Transform::from_translation(world_pos))
                         .insert(Stopped)
                         .insert(TetrominoBlock { id: tetromino.id });
@@ -76,6 +91,7 @@ pub fn falling_blocks(
 pub fn handle_despawn_event(
     mut commands: Commands,
     mut event_reader: EventReader<RowCleaned>,
+    mut game_info: ResMut<GameInfo>,
     query: Query<(Entity, &Transform), (With<Tetromino>, With<Stopped>)>,
 ) {
     for event in event_reader.read() {
@@ -91,6 +107,9 @@ pub fn handle_despawn_event(
                     });
             }
         }
+
+        let points = game_info.points;
+        game_info.update_points(points + POINTS_DELTA_PER_ROW);
     }
 }
 

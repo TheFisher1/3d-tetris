@@ -1,15 +1,18 @@
+use super::is_valid_position_tetromino;
 use crate::game::game_elements::{Falling, GameGrid, RotateButton, Tetromino, ROTATION_DEGREES};
+use crate::game::systems::Lock;
 use bevy::math::Dir3;
 use bevy::prelude::{Button, Changed, Children, Interaction, Query, Res, Transform, With, Without};
-
-use super::is_valid_position_tetromino;
 
 pub fn rotate_system(
     mut interaction_query: Query<
         (&Interaction, &RotateButton),
         (Changed<Interaction>, With<Button>),
     >,
-    mut piece_query: Query<(&mut Transform, &Children), (With<Tetromino>, With<Falling>)>,
+    mut piece_query: Query<
+        (&mut Transform, &Children),
+        (With<Tetromino>, With<Falling>, Without<Lock>),
+    >,
     transform_query: Query<&Transform, Without<Tetromino>>,
     game_grid: Res<GameGrid>,
 ) {

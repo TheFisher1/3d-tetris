@@ -3,7 +3,7 @@ use crate::game::systems::settings::node_settings::NodeSettings;
 use bevy::color::Color;
 use bevy::prelude::*;
 use bevy::prelude::{
-    default, BorderColor, BorderRadius, Button, Interaction, Text, TextColor, TextFont
+    default, BorderColor, BorderRadius, Button, Interaction, Text, TextColor, TextFont,
 };
 
 pub fn spawn_button(
@@ -15,7 +15,7 @@ pub fn spawn_button(
     parent
         .spawn((
             Button,
-            settings.build(),
+            settings.node(),
             BorderColor(Color::BLACK),
             BorderRadius::MAX,
             Interaction::default(),
