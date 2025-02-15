@@ -29,12 +29,14 @@ pub fn keyboard_system(
     for (entity, mut transform, mut cooldown, _, children) in query.iter_mut() {
         if keyboard.just_pressed(KeyCode::Space) {
             let mut test_transform = transform.clone();
+
             transform.translation.y = find_highest_valid_latitude(
                 &mut test_transform,
                 game_grid,
                 children,
                 transform_query,
             );
+
             commands.entity(entity).insert(Lock);
             return;
         }

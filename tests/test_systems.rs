@@ -5,15 +5,15 @@ use tetris::game::game_info::GameState;
 use tetris::game::systems::setup::play_page::tetromino::check_is_game_over;
 use tetris::game::{game_elements::*, state::game_info::GameInfo, systems::*};
 
-#[path="utils.rs"]
+#[path = "utils.rs"]
 mod utils;
 use utils::*;
 
 #[cfg(test)]
 pub mod tests {
     use super::*;
-    use crate::utils::get_or_find_transform;
     use crate::utils::gen_tetromino;
+    use crate::utils::get_or_find_transform;
 
     #[test]
     fn test_handle_despawn_event() {

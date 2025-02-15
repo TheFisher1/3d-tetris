@@ -8,7 +8,7 @@ use tetris::game_info::GameInfo;
 use tetris::systems::{falling, update_grid_state, RowCleaned};
 use tetris::GRID_HEIGHT;
 
-#[path="utils.rs"]
+#[path = "utils.rs"]
 mod utils;
 
 #[test]
