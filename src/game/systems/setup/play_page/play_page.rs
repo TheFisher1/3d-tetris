@@ -55,7 +55,7 @@ pub fn setup(mut commands: Commands) {
                 parent,
                 "Left",
                 RotateButton::Left,
-                NodeSettings::builder(150.0, 65.0)
+                NodeSettings::builder(Val::Px(150.0), Val::Px(65.0))
                     .border(UiRect::all(Val::Px(5.0)))
                     .justify_content(JustifyContent::Center)
                     .align_items(AlignItems::Center)
@@ -66,7 +66,7 @@ pub fn setup(mut commands: Commands) {
                 parent,
                 "Right",
                 RotateButton::Right,
-                NodeSettings::builder(150.0, 65.0)
+                NodeSettings::builder(Val::Px(150.0), Val::Px(65.0))
                     .border(UiRect::all(Val::Px(5.0)))
                     .justify_content(JustifyContent::Center)
                     .align_items(AlignItems::Center)
@@ -77,7 +77,7 @@ pub fn setup(mut commands: Commands) {
                 parent,
                 "Up",
                 RotateButton::Up,
-                NodeSettings::builder(150.0, 65.0)
+                NodeSettings::builder(Val::Px(150.0), Val::Px(65.0))
                     .align_items(AlignItems::Center)
                     .justify_content(JustifyContent::Center)
                     .border(UiRect::all(Val::Px(5.0)))
@@ -88,7 +88,7 @@ pub fn setup(mut commands: Commands) {
                 parent,
                 "Down",
                 RotateButton::Down,
-                NodeSettings::builder(150.0, 65.0)
+                NodeSettings::builder(Val::Px(150.0), Val::Px(65.0))
                     .border(UiRect::all(Val::Px(5.0)))
                     .justify_content(JustifyContent::Center)
                     .align_items(AlignItems::Center)

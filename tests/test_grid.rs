@@ -1,4 +1,4 @@
-use crate::utils::util_functions::{gen_tetromino, get_or_find_transform};
+use crate::utils::{gen_tetromino, get_or_find_transform};
 use bevy::prelude::*;
 use tetris::game::game_elements::GameGrid;
 use tetris::game::systems::get_grid_position;
@@ -7,6 +7,9 @@ use tetris::game::{GRID_DEPTH, GRID_WIDTH};
 use tetris::game_info::GameInfo;
 use tetris::systems::{falling, update_grid_state, RowCleaned};
 use tetris::GRID_HEIGHT;
+
+#[path="utils.rs"]
+mod utils;
 
 #[test]
 fn test_is_valid_position() {

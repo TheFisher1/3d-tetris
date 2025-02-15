@@ -9,7 +9,7 @@ use bevy::prelude::{
 pub fn spawn_button(
     parent: &mut ChildBuilder,
     button_text: &str,
-    rotate_button_action: RotateButton,
+    rotate_button: RotateButton,
     settings: NodeSettings,
 ) {
     parent
@@ -19,7 +19,7 @@ pub fn spawn_button(
             BorderColor(Color::BLACK),
             BorderRadius::MAX,
             Interaction::default(),
-            rotate_button_action,
+            rotate_button,
         ))
         .with_child((
             Text::new(button_text),
