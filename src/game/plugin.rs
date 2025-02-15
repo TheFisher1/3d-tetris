@@ -26,6 +26,7 @@ use crate::game::systems::{
     util::add_sound,
     RowCleaned, {handle_start_button, setup_home_page}
 };
+use crate::game::systems::util::add_image;
 use bevy::prelude::*;
 
 pub struct TetrisPlugin;
@@ -34,7 +35,7 @@ impl Plugin for TetrisPlugin {
     fn build(&self, app: &mut App) {
         app.insert_resource(GameGrid::new())
             .insert_state(GameState::StartPage)
-            .add_systems(Startup, add_sound)
+            .add_systems(Startup, (add_sound, add_image))
             .add_systems(
                 OnEnter(GameState::StartPage),
                 setup_home_page.after(cleanup_play_page),

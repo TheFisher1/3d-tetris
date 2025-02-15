@@ -12,8 +12,6 @@ use utils::*;
 #[cfg(test)]
 pub mod tests {
     use super::*;
-    use crate::utils::gen_tetromino;
-    use crate::utils::get_or_find_transform;
 
     #[test]
     fn test_handle_despawn_event() {
@@ -284,7 +282,7 @@ pub mod tests {
             .translation
             .y;
 
-        // This should be enough to simulate 1.0 seconds
+        // This should be enough to simulate #fall_time seconds
         for _ in 0..10 {
             app.update();
         }

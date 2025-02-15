@@ -15,7 +15,7 @@ pub fn get_or_find_transform(mut app: &mut App, tetromino_id: Entity) -> Transfo
 }
 
 pub fn gen_tetromino(
-    mut app: &mut App,
+    app: &mut App,
     position: (f32, f32, f32),
     fall_time: f32,
     movement_cooldown_time: f32,

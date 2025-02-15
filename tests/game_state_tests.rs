@@ -3,7 +3,7 @@ use bevy::prelude::Transform;
 use bevy::MinimalPlugins;
 use tetris::game::state::game_info::GameInfo;
 use tetris::game_info::{update_level, update_points};
-use tetris::systems::{cleanup, RowCleaned, cleanup_row};
+use tetris::systems::{RowCleaned, cleanup_row};
 use tetris::{GameGrid, Stopped, TetrominoBlock, GRID_DEPTH, GRID_WIDTH};
 
 #[test]

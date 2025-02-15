@@ -116,7 +116,7 @@ fn test_update_grid() {
         app.update();
     }
 
-    let transform = get_or_find_transform(&mut app, tetromino_id);
+    let _ = get_or_find_transform(&mut app, tetromino_id);
 
     let game_grid = app.world().resource::<GameGrid>();
     assert!(!game_grid.is_cell_empty(2, 1, 2))
