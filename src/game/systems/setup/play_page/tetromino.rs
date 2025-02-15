@@ -12,7 +12,7 @@ pub fn spawn_new_tetromino(
     mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<StandardMaterial>>,
     game_info: ResMut<GameInfo>,
-    falling_query: Query<&Tetromino, With<Falling>>,
+    falling_query: Query<&Tetromino, (With<Falling>, With<Active>)>,
 ) {
     let position = Vec3::new(
         GRID_WIDTH as f32,
