@@ -4,7 +4,7 @@ use bevy::prelude::*;
 #[derive(Event)]
 pub struct RowCleaned(pub i32);
 
-pub fn cleanup(
+pub fn cleanup_row(
     mut commands: Commands,
     mut game_grid: ResMut<GameGrid>,
     mut event_writer: EventWriter<RowCleaned>,

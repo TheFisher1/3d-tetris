@@ -29,8 +29,9 @@ impl Iterator for Tetromino {
     type Item = Tetromino;
 
     fn next(&mut self) -> Option<Tetromino> {
+        let mod_value = 1e3 as isize + 7;
         Some(Tetromino {
-            id: self.id + 1,
+            id: (self.id + 1) % mod_value,
             tetromino_type: TetrominoType::random(),
         })
     }

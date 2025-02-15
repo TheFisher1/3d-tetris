@@ -3,7 +3,7 @@ use bevy::prelude::Transform;
 use bevy::MinimalPlugins;
 use tetris::game::state::game_info::GameInfo;
 use tetris::game_info::{update_level, update_points};
-use tetris::systems::{cleanup, RowCleaned};
+use tetris::systems::{cleanup, RowCleaned, cleanup_row};
 use tetris::{GameGrid, Stopped, TetrominoBlock, GRID_DEPTH, GRID_WIDTH};
 
 #[test]
@@ -46,7 +46,7 @@ fn test_game_info_update_points() {
         .insert_resource(GameGrid::new())
         .insert_resource(GameInfo::new())
         .add_event::<RowCleaned>()
-        .add_systems(Update, (cleanup, update_points));
+        .add_systems(Update, (cleanup_row, update_points));
 
     let level_to_fill = 1.0f32;
 
@@ -88,7 +88,7 @@ fn test_game_info_update_level() {
         .insert_resource(GameGrid::new())
         .insert_resource(GameInfo::new())
         .add_event::<RowCleaned>()
-        .add_systems(Update, (cleanup, update_level));
+        .add_systems(Update, (cleanup_row, update_level));
 
     let level_to_fill = 1.0f32;
 

@@ -5,24 +5,27 @@ use bevy::app::Startup;
 use crate::game::game_elements::GameGrid;
 use crate::game::game_info::{update_level, update_points};
 use crate::game::state::game_info::{reset_game_info, GameInfo, GameState};
-use crate::game::systems::cleanup;
+use crate::game::systems::cleanup_row;
 use crate::game::systems::cleanup_home_page::cleanup_home_page;
-use crate::game::systems::falling;
-use crate::game::systems::falling_blocks;
-use crate::game::systems::handle_despawn_event;
-use crate::game::systems::handle_despawn_event_blocks;
-use crate::game::systems::keyboard_system;
-use crate::game::systems::rotate_camera;
-use crate::game::systems::rotate_system;
-use crate::game::systems::setup::play_page::cleanup_play_page::game_despawn;
-use crate::game::systems::setup::play_page::grid::spawn_grid;
-use crate::game::systems::setup::play_page::play_page::setup;
-use crate::game::systems::setup::play_page::tetromino::check_is_game_over;
-use crate::game::systems::setup::play_page::tetromino::spawn_new_tetromino;
-use crate::game::systems::update_grid_state;
-use crate::game::systems::util::add_sound;
-use crate::game::systems::RowCleaned;
-use crate::game::systems::{handle_start_button, setup_home_page};
+use crate::game::systems::{
+    falling, falling_blocks, handle_despawn_event, 
+    handle_despawn_event_blocks,
+    keyboard_system,
+    rotate_camera,
+    rotate_system
+};
+use crate::game::systems::setup::play_page::{
+    cleanup_play_page::cleanup_play_page,
+    grid::spawn_grid, 
+    play_page::setup,
+    tetromino::check_is_game_over,
+    tetromino::spawn_new_tetromino
+};
+use crate::game::systems::{
+    update_grid_state, 
+    util::add_sound,
+    RowCleaned, {handle_start_button, setup_home_page}
+};
 use bevy::prelude::*;
 
 pub struct TetrisPlugin;
@@ -34,7 +37,7 @@ impl Plugin for TetrisPlugin {
             .add_systems(Startup, add_sound)
             .add_systems(
                 OnEnter(GameState::StartPage),
-                setup_home_page.after(game_despawn),
+                setup_home_page.after(cleanup_play_page),
             )
             .add_systems(
                 Update,
@@ -57,7 +60,7 @@ impl Plugin for TetrisPlugin {
                     falling_blocks,
                     handle_despawn_event_blocks,
                     falling,
-                    cleanup,
+                    cleanup_row,
                     spawn_new_tetromino,
                     keyboard_system,
                     check_is_game_over,
@@ -69,7 +72,7 @@ impl Plugin for TetrisPlugin {
             )
             .add_systems(
                 OnExit(GameState::Playing),
-                (reset_game_info, game_despawn).chain(),
+                (reset_game_info, cleanup_play_page).chain(),
             );
     }
 }

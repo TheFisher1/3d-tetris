@@ -5,7 +5,7 @@ use crate::game::systems::setup::play_page::grid::Grid;
 use crate::game::systems::setup::play_page::play_page::RotationControls;
 use bevy::prelude::{Commands, DespawnRecursiveExt, Entity, Query, ResMut, With};
 
-pub fn game_despawn(
+pub fn cleanup_play_page(
     mut commands: Commands,
     query_grid: Query<Entity, With<Grid>>,
     query_tetrominoes: Query<Entity, With<Tetromino>>,

@@ -22,7 +22,7 @@ pub mod tests {
             .insert_resource(GameGrid::new())
             .insert_resource(GameInfo::new())
             .add_event::<RowCleaned>()
-            .add_systems(Update, (cleanup, handle_despawn_event_blocks));
+            .add_systems(Update, (cleanup_row, handle_despawn_event_blocks));
 
         let level_to_fill = 1.0f32;
 

@@ -1,12 +1,12 @@
 use bevy::prelude::*;
 use tetris::game::game_elements::{GameGrid, GRID_DEPTH, GRID_WIDTH};
-use tetris::game::systems::cleanup::{cleanup, RowCleaned};
+use tetris::game::systems::cleanup::{cleanup_row, RowCleaned};
 
 #[test]
 fn test_row_clearing() {
     let mut app = App::new();
 
-    app.add_event::<RowCleaned>().add_systems(Update, cleanup);
+    app.add_event::<RowCleaned>().add_systems(Update, cleanup_row);
 
     let mut game_grid = GameGrid::new();
 
@@ -46,7 +46,7 @@ fn test_row_clearing() {
 fn test_multiple_rows_clearing() {
     let mut app = App::new();
     app.add_event::<RowCleaned>();
-    app.add_systems(Update, cleanup);
+    app.add_systems(Update, cleanup_row);
 
     let mut game_grid = GameGrid::new();
 
