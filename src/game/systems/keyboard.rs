@@ -1,4 +1,3 @@
-use crate::game::components::Stopped;
 use crate::game::game_elements::{
     Active, Falling, GameGrid, MovementCooldown, Tetromino, BLOCK_SIZE,
 };
