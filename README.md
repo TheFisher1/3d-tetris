@@ -9,4 +9,4 @@ The camera can be rotated using &uarr;, &darr;, &larr;, &rarr;; The different bl
 
 ### Further add-ons
 This project is intended to be a simple 3d tetris game, but can be further developed - through WASM it can be exported to a Browser. 
-As for the game logic, new tetrominoes as well as new interesting forms can be can be included. I have stuck to the original game, however one can advance it, should they want, in any direction.
+As for the game logic, new tetrominoes as well as new interesting forms can be can be included. I have stuck to the original game, however, one can advance it, should they want, in any direction.
