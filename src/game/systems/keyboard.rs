@@ -1,3 +1,4 @@
+use crate::game::components::Stopped;
 use crate::game::game_elements::{
     Active, Falling, GameGrid, MovementCooldown, Tetromino, BLOCK_SIZE,
 };
@@ -89,7 +90,7 @@ fn find_highest_valid_latitude(
 
     let mut highest_valid_y_reached = true;
 
-    while test_transform.translation.y > 0.0 && highest_valid_y_reached {
+    while test_transform.translation.y >= 0.0 && highest_valid_y_reached {
         test_transform.translation.y -= BLOCK_SIZE;
         if !is_valid_position_tetromino(&test_transform, &game_grid, children, &transform_query) {
             test_transform.translation.y += BLOCK_SIZE;

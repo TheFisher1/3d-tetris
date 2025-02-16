@@ -2,6 +2,7 @@ use crate::game::game_elements::*;
 use crate::game::state::game_info::{GameInfo, GameState};
 use crate::game::systems::is_valid_position_tetromino;
 use crate::game::systems::Lock;
+use crate::game::game_elements::components::TetrominoType;
 use bevy::asset::Assets;
 use bevy::math::Vec3;
 use bevy::pbr::{MeshMaterial3d, StandardMaterial};

@@ -52,7 +52,9 @@ impl GameGrid {
         }
 
         (1..GRID_DEPTH)
-            .all(|x| (1..GRID_WIDTH).all(|z| !self.is_cell_empty(x as i32, y as i32, z as i32)))
+            .all(|x| (1..GRID_WIDTH).all(|z| {
+                !self.is_cell_empty(x as i32, y as i32, z as i32)
+            }))
     }
 
     pub fn clear_row(&mut self, y: i32) {

@@ -1,4 +1,4 @@
-use crate::game::game_elements::TetrominoType;
+use crate::game::game_elements::components::TetrominoType;
 use bevy::math::Vec3;
 use bevy::prelude::Color;
 
@@ -49,16 +49,16 @@ pub static TETROMINO_OFFSETS: &[&[Vec3]] = &[
             y: 0.0,
             z: 0.0,
         },
-        Vec3 {
-            x: 2.0,
-            y: 0.0,
-            z: 0.0,
-        },
-        Vec3 {
-            x: 3.0,
-            y: 0.0,
-            z: 0.0,
-        },
+        // Vec3 {
+        //     x: 2.0,
+        //     y: 0.0,
+        //     z: 0.0,
+        // },
+        // Vec3 {
+        //     x: 3.0,
+        //     y: 0.0,
+        //     z: 0.0,
+        // },
     ],
     &[
         // L

@@ -22,8 +22,7 @@ pub fn falling(
     )>,
     transform_query: Query<&Transform, Without<Tetromino>>,
 ) {
-    for (entity, mut transform, mut falling, tetromino, children, is_just_spawned) in
-        query.iter_mut()
+    for (entity, mut transform, mut falling, tetromino, children, is_just_spawned) in query.iter_mut()
     {
         falling.timer.tick(time.delta());
         if !falling.timer.just_finished() {
